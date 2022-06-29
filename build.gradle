@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'io.cucumber:cucumber-java:6.10.4'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '4.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+
+test {
+    useJUnitPlatform()
+    finalizedBy(jacocoTestReport)
+}
+
+jacocoTestReport {
+    reports.xml.required = true
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+task cucumber() {
+    dependsOn assemble, testClasses
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', '--glue', 'Cooker', 'src/test/resources']
+        }
+    }
+}

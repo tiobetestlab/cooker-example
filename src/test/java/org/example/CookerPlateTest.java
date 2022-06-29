@@ -20,7 +20,7 @@ class CookerPlateTest {
         PlateControlInterface mockplateControlInterface = mock(PlateControlInterface.class);
         final CookerPlate cookerPlate = new CookerPlate(mockplateControlInterface);
 
-        when(mockplateControlInterface.getTemperature()).thenReturn(101);
+        when(mockplateControlInterface.getTemperature()).thenReturn(100);
         assertEquals("warm", cookerPlate.Temperature());
     }
 

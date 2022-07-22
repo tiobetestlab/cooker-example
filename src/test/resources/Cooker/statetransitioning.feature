@@ -1,3 +1,4 @@
+# Copyright TIOBE Software B.V.
 Feature: Statetransitioning
   Cover all transitions of the state transition diagram of the cookerplate
 
@@ -31,3 +32,17 @@ Feature: Statetransitioning
     When I cool the plate
     Then I should have a cold cookerplate
 
+Scenario Outline: Cover all state transitions.
+Cover all transitions of the state transition diagram of the cookerplate using Scenario Outline
+  Given cookerplate is <startTemp>
+  When I <action> the plate
+  Then I should have a <endTemp> cookerplate
+
+  Examples:
+  | startTemp | action | endTemp |
+  | cold      | heat   | warm    |
+  | warm      | heat   | hot     |
+  | hot       | heat   | hot     |
+  | hot       | cool   | warm    |
+  | warm      | cool   | cold    |
+  | cold      | cool   | cold    |

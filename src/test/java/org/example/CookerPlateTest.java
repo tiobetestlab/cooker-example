@@ -24,6 +24,7 @@ class CookerPlateTest {
         assertEquals("warm", cookerPlate.Temperature());
     }
 
+
     /**
      * Check continuation of running the function after an assertion is false.
      * As the Cookerplate will be cold when initiated, the assertEquals will be false.

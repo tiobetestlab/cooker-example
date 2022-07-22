@@ -45,6 +45,12 @@ public class StepDefinitions {
         // Cool down the cooker plate one step.
         cookerPlate.cool();
     }
+
+    @When("I do nothing")
+    public void i_do_nothing() {
+        // No heating and cooling to be done here.
+    }
+
     @Then("I should have a cold cookerplate")
     public void i_should_have_a_cold_cookerplate() {
         // Call the Temperature function and determine if it's cold.
